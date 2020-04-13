@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Список покупок</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="../css/style.css" rel="stylesheet" type="text/css">
+    <script defer src="js/bootstrap-4.0.0.js"></script>
+    <script defer src="../js/vue.js"></script>
+    <script defer src="../js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <section id="component" aria-labelledby="items-label">
+            <h1 id=="items-label" tabindex="-1">Список покупок</h1>
+            <ul>
+                <li v-for="(item, index) in items">
+                    <input type="checkbox" :id="`item-${index}`" v-model="item.done" class="check">
+                    <label :for="`item-${index}`">
+                        <span class="mainform"></span>
+                        <span class="text">{{item.name}}</span>
+                    </label>
+                    <button @click="remove(index, item.name)" :aria-label="`delete ${item.name}`">
+                        <img src="http://s1.iconbird.com/ico/2013/12/505/w450h4001385925290Delete.png" width="100" height="100">
+                    </button>
+                </li>
+            </ul>
+            <div class="empty-state">
+                <p>Расскажите про покупки,
+                    Про какие про покупки?
+                    Про покупки, про
+                    покупки,
+                    Про покупочки мои...</p>
+            </div>
+            <form @submit="add">
+                <input type="text" id="add" v-model="itemName" placeholder="Введите название товара..." :aria-invalid="validity">
+                <button type="submit" :disabled="validity">Добавить</button>
+            </form>
+        </section>
+    </div>
+</body>
+</html>
+
